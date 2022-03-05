@@ -1,0 +1,106 @@
+USE [TDW]
+GO
+/****** Object:  Table [dbo].[datetime_log]    Script Date: 3/5/2022 11:28:26 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[datetime_log](
+	[SuccesfulStart] [datetime] NULL,
+	[SuccessfulEnd] [datetime] NULL,
+	[LastsuccessfulStart] [datetime] NULL,
+	[LastsuccessfulEnd] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dim_customer]    Script Date: 3/5/2022 11:28:26 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dim_customer](
+	[CUST_Code] [int] NULL,
+	[CUST_NAME] [varchar](100) NULL,
+	[CUST_TYPE] [varchar](300) NULL,
+	[CUST_STATUS] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dim_Department]    Script Date: 3/5/2022 11:28:26 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dim_Department](
+	[DEPT_ID] [int] NULL,
+	[DEPT_Code] [varchar](20) NULL,
+	[DEPT_NAME] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dim_ticket]    Script Date: 3/5/2022 11:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dim_ticket](
+	[Ticketid] [int] NULL,
+	[Ticketdesc] [varchar](300) NULL,
+	[TicketType] [varchar](300) NULL,
+	[SEVERITY_DESC] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Fact_TicketTrans]    Script Date: 3/5/2022 11:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Fact_TicketTrans](
+	[TransID] [bigint] IDENTITY(1,1) NOT NULL,
+	[TicketID] [int] NULL,
+	[ASSIGNED_TO_DEPT_ID] [int] NULL,
+	[OPEN_TIMESTAMP] [datetime] NULL,
+	[TARGET_TIMESTAMP] [datetime] NULL,
+	[ORG_TARGET_TIMESTAMP] [datetime] NULL,
+	[CLOSED_TIMESTAMP] [datetime] NULL,
+	[Assigned_TO] [varchar](100) NULL,
+	[Assigned_TO_MNGR] [varchar](100) NULL,
+	[TicketStatus] [varchar](100) NULL,
+	[CUST_CODE] [int] NULL,
+	[Action_TEXT] [varchar](300) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TransID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+USE [T]
+GO
+/****** Object:  Table [dbo].[tdump]    Script Date: 3/5/2022 11:30:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tdump](
+	[Ticketid] [int] NULL,
+	[TicketDesc] [varchar](300) NULL,
+	[TicketType] [varchar](100) NULL,
+	[OPEN_TIMESTAMP] [datetime] NULL,
+	[TARGET_TIMESTAMP] [datetime] NULL,
+	[ORG_TARGET_TIMESTAMP] [datetime] NULL,
+	[SEVERITY_DESC] [varchar](100) NULL,
+	[CUST_CODE] [int] NULL,
+	[CUST_NAME] [varchar](100) NULL,
+	[CUST_TYPE] [varchar](110) NULL,
+	[CUST_STATUS] [varchar](120) NULL,
+	[TICKET_STATUS] [varchar](200) NULL,
+	[ASSIGNED_TO] [varchar](130) NULL,
+	[ASSIGNED_TO_MGR] [varchar](130) NULL,
+	[ASSIGNED_DEPT_ID] [int] NULL,
+	[ASSIGNED_DEPT_CODE] [varchar](100) NULL,
+	[ASSIGNED_DEPT_NAME] [varchar](100) NULL,
+	[CLOSE_TIMESTAMP] [datetime] NULL,
+	[ACTION_TEXT] [varchar](400) NULL,
+	[TRAN_DATE] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+
